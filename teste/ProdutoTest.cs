@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Xunit;
+using teste.classes;
 
 namespace teste
 {
