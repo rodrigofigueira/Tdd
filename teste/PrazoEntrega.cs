@@ -6,28 +6,39 @@ namespace teste
     public class PrazoEntrega
     {
 
-        [Fact(Skip="aguardando outros testes")]
+        [Fact]
         public void TestePrazoEntregaLocal(){
             Assert.Equal("Entrega em 5 dias", new Frete().PrazoDestino("SP", "sp"));
         }
         
-        [Fact(Skip="aguardando outros testes")]
+        [Fact]
         public void TestePrazoEntregaForaDoEstado(){
             Assert.Equal("Entrega em 15 dias", new Frete().PrazoDestino("BA", "sp"));
         }
 
         [Fact]
-        public void RetornarEstadoSolicitado(){            
-            string estadoSolicitado = "SP";
-            var estadoRetornado = new Frete().SelecionarPorEstado(estadoSolicitado);
-            Assert.Equal(estadoSolicitado, estadoRetornado.Estado);
+        public void TestePrazoEntregaOrigemErrada(){
+            Assert.Equal("Estado origem BLAH não existe", new Frete().PrazoDestino("blah", "sp"));
         }
 
         [Fact]
-        public void RetornaDistanciaMaiorQueZero(){
-            double distancia = new Frete().DistanciaEntreEstados("SP", "BA");
-            Assert.True(distancia > 0);
+        public void TestePrazoEntregaDestinoErrado(){
+            Assert.Equal("Estado destino BLAH não existe", new Frete().PrazoDestino("sp", "blah"));
+        }
+
+        [Theory]
+        [InlineData("SP", "RJ", "RS", "AC", "ce")]
+        public void ValoresPassadosSaoEstadosValidos(params string[] estados){            
+            foreach(string estado in estados)
+                Assert.True(new Frete().EstadoExiste(estado));
         }
         
+        [Theory]
+        [InlineData("99", "ok", "", " ")]        
+        public void ValoresPassadosComoEstadoRetornamFalse(params string[] estados){
+            foreach(string estado in estados)
+                Assert.False(new Frete().EstadoExiste(estado));
+        }
+
     }
 }
