@@ -4,7 +4,7 @@ using Xunit;
 
 namespace teste
 {
-    public class PagamentoFatura
+    public class FaturaTest
     {
         [Fact]
         public void VerificaPagamentoAtrasado(){
