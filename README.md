@@ -9,3 +9,4 @@ Os códigos do livro estão feitos em Java, os adaptei para C#
 
 - Laboratório 1 : Pagamentos de Faturas
 - Laboratório 2 : Prazo de Entrega
+- Laboratório 3 : Embalagem
